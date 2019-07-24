@@ -1,23 +1,36 @@
 <template>
     <v-app>
-        <div v-if="errored">
-            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-        </div>
-        <div v-else>
-            <v-container v-if="loading">
-                <div class="text-xs-center">
-                    <v-progress-circular indeterminate :size="150" :width="8" color="green"> </v-progress-circular>
-                </div>
+        <v-content>
+            <v-container>
+                <v-layout align-center justify-center >
+                    <v-flex text-center>
+                        <v-card>
+                            <v-card-title>
+                                <div v-if="errored">
+                                    <p class="mb-0">We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+                                </div>
+                                <v-container v-else>
+                                    <div v-if="loading" class="text-xs-center">
+                                        <v-progress-circular indeterminate :size="150" :width="8" color="green"> </v-progress-circular>
+                                    </div>
+                                    <div v-else class="text-xs-center">
+                                        <p class="mb-0">{{ todo.title }}</p>
+                                    </div>
+                                </v-container>
+                            </v-card-title>
+                            <v-card-actions v-if="$route.name == 'Todo'">
+                                <v-btn flat color="green" @click="back">back</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
             </v-container>
-            <div v-else class="text-xs-center">
-                <p>{{ todo.title }}</p>
-            </div>
-        </div>
+        </v-content>
     </v-app>
 </template>
 
 <script>
-    import todoApi from './../services/TodoApi'
+    import todoApi from '@/services/TodoApi'
 
     export default {
         props: ['id'],
@@ -30,7 +43,6 @@
         },
         watch: {
             id: function () {
-                console.log('id changed');
                 this.getCurrentTodo();
             }
         },
@@ -50,13 +62,13 @@
                         this.loading = false;
                     }, delay);
                 })
+            },
+            back () {
+                this.$router.push('/')
             }
         },
-        created: function () {
-            this.getCurrentTodo();
-        },
         mounted: function () {
-            console.log('mounted');
+            this.getCurrentTodo();
         }
     }
 </script>

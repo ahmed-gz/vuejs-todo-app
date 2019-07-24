@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'babel-polyfill'
-import TodoApp from './TodoApp.vue'
+import App from './App.vue'
+import router from './router'
 
 Vue.use(Vuetify)
 
 const app = new Vue({
-    el: '#todoApp',
-    render: h => h(TodoApp)
+    el: '#app',
+    render: h => h(App),
+    router
 })
-
-console.log('TodoApp');

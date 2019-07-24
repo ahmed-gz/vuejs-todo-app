@@ -1,6 +1,5 @@
 'use strict'
 
-
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
@@ -14,6 +13,11 @@ module.exports = {
         path: path.resolve(__dirname, './public/assets/js'),
         publicPath: '/public/assets/js/',
         filename: 'main.js'
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        },
     },
     module: {
         rules: [
