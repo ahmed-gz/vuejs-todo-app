@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-
-Vue.use(Vuetify)
-
 import 'babel-polyfill'
 import TodoApp from './TodoApp.vue'
+
+Vue.use(Vuetify)
 
 const app = new Vue({
     el: '#todoApp',
